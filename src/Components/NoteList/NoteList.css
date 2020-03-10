@@ -6,7 +6,10 @@
   padding: 8px;
   margin-top: 16px;
   border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: 3px 3px 3px 3px gray;
   font-size: 1.1em;
+  text-align: center;
   max-width: 75%;
   min-height: 4em;
 }
