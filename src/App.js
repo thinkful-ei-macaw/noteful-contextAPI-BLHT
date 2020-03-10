@@ -3,7 +3,7 @@ import './App.css';
 import FolderNav from './Components/FolderNav/FolderNav';
 import NoteList from './Components/NoteList/NoteList';
 import NoteDetails from './Components/NoteDetails/NoteDetails';
-import { Route } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 
 class App extends Component {
   constructor(props) {
@@ -22,7 +22,9 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App__header">
-          <h1>Noteful</h1>
+          <h1>
+            <Link to="/">Noteful</Link>
+          </h1>
         </header>
         <Route
           exact
