@@ -19,8 +19,8 @@ class App extends Component {
         <header className="App__header">
           <h1>Noteful</h1>
         </header>
-        <Route path="/" render={() => <FolderNav />} />
-        <Route path="/" render={() => <NoteList />} />
+        <Route path="/" render={() => <FolderNav folders={this.state.folders} />} />
+        <Route path="/" render={() => <NoteList notes={this.state.notes} />} />
       </div>
     );
   }

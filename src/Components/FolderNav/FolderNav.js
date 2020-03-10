@@ -6,17 +6,15 @@ class FolderNav extends Component {
     return (
       <nav className="Sidebar__nav">
         <ul>
-          <li>
-            <a href="#">Folder 1</a>
-          </li>
-          <li>
-            <a href="#">Folder 2</a>
-          </li>
-          <li>
-            <a href="#">Folder 3</a>
-          </li>
+          {this.props.folders.map(folder => {
+            return (
+            <li key={folder.id}>
+              <h2>{folder.name}</h2>
+            </li>
+            )    
+        })}
         </ul>
-      </nav>
+      </nav>  
     );
   }
 }

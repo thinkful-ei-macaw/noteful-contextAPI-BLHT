@@ -2,14 +2,23 @@ import React, { Component } from 'react';
 import './NoteList.css';
 
 class NoteList extends Component {
+
+  formatDate(date) {
+    return new Date(date).toLocaleString()
+  }
+
   render() {
     return (
       <ul className="Main__content">
-        <li>Note 1</li>
-        <li>Note 2</li>
-        <li>Note 3</li>
-        <li>Note 4</li>
-        <li>Note 5</li>
+        {this.props.notes.map(note => {
+          const date = this.formatDate(note.modified)
+          return (
+          <li key={note.id}>
+            <h2>{note.name}</h2>
+            <p>{date}</p>
+          </li>
+          )}
+        )}
       </ul>
     );
   }
