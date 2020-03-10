@@ -9,9 +9,13 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      folders: this.props.store.folders,
-      notes: this.props.store.notes,
+      folders: [],
+      notes: [],
     };
+  }
+
+  componentDidMount() {
+    this.setState(this.props.store);
   }
 
   render() {
