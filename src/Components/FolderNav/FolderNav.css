@@ -1,0 +1,11 @@
+.Sidebar__nav > ul {
+  list-style-type: none;
+}
+
+.Sidebar__nav > ul > li {
+  padding: 8px;
+  border: 1px solid black;
+  font-size: 1.1em;
+  max-width: 75%;
+  min-height: 2em;
+}
