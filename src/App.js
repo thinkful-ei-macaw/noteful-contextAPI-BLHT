@@ -3,7 +3,7 @@ import './App.css';
 import FolderNav from './Components/FolderNav/FolderNav';
 import NoteList from './Components/NoteList/NoteList';
 import NoteDetails from './Components/NoteDetails/NoteDetails';
-import { Route, Link } from 'react-router-dom';
+import { Route, Link, Switch } from 'react-router-dom';
 
 class App extends Component {
   constructor(props) {
@@ -31,30 +31,33 @@ class App extends Component {
           path={['/', '/note-list/:id']}
           render={() => <FolderNav folders={this.state.folders} />}
         />
-        <Route
-          exact
-          path="/"
-          render={() => <NoteList notes={this.state.notes} />}
-        />
-        <Route
-          path="/note-list/:id"
-          render={({ match }) => (
-            <NoteList
-              notes={this.state.notes.filter(
-                note => note.folderId === match.params.id,
-              )}
-            />
-          )}
-        />
-        <Route
-          path="/note-details/:id"
-          render={({ match }) => (
-            <NoteDetails
-              folders={this.state.folders}
-              note={this.state.notes.find(n => n.id === match.params.id)}
-            />
-          )}
-        />
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={() => <NoteList notes={this.state.notes} />}
+          />
+          <Route
+            path="/note-list/:id"
+            render={({ match }) => (
+              <NoteList
+                notes={this.state.notes.filter(
+                  note => note.folderId === match.params.id,
+                )}
+              />
+            )}
+          />
+          <Route
+            path="/note-details/:id"
+            render={({ match }) => (
+              <NoteDetails
+                folders={this.state.folders}
+                note={this.state.notes.find(n => n.id === match.params.id)}
+              />
+            )}
+          />
+          <Route path="/" render={() => <div>404 Not Found</div>} />
+        </Switch>
       </div>
     );
   }
