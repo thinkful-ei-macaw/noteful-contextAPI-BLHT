@@ -9,3 +9,8 @@
   max-width: 75%;
   min-height: 2em;
 }
+
+.Sidebar__selected {
+  color: rgb(5, 117, 117);
+  font-size: 1.2em;
+}

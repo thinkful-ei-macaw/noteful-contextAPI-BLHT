@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './FolderNav.css';
+import { NavLink } from 'react-router-dom';
 
 class FolderNav extends Component {
   render() {
@@ -8,13 +9,18 @@ class FolderNav extends Component {
         <ul>
           {this.props.folders.map(folder => {
             return (
-            <li key={folder.id}>
-              <h2>{folder.name}</h2>
-            </li>
-            )    
-        })}
+              <li key={folder.id}>
+                <NavLink
+                  to={`/note-list/${folder.id}`}
+                  activeClassName="Sidebar__selected"
+                >
+                  {folder.name}
+                </NavLink>
+              </li>
+            );
+          })}
         </ul>
-      </nav>  
+      </nav>
     );
   }
 }
