@@ -1,8 +1,21 @@
 import React, { Component } from 'react';
 import './NoteDetails.css';
 import NoteDetailsNav from '../NoteDetailsNav/NoteDetailsNav';
+import Context from '/.src/Context';
 
 class NoteDetails extends Component {
+
+  static defaultProps = {
+    onDeleteNote: () => {}
+  }
+
+  handleDeleteNote = (event) => {
+    event.preventDefault();
+    const noteId = this.props.id;
+
+
+  }
+
   render() {
     const { folderId, name, content, modified } = this.props.note;
     const dateModified = new Date(modified).toLocaleString();

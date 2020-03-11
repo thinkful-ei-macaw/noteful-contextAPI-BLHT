@@ -4,6 +4,7 @@ import FolderNav from './Components/FolderNav/FolderNav';
 import NoteList from './Components/NoteList/NoteList';
 import NoteDetails from './Components/NoteDetails/NoteDetails';
 import { Route, Link, Switch } from 'react-router-dom';
+import Context from './Components/Context';
 
 class App extends Component {
   constructor(props) {
@@ -16,7 +17,12 @@ class App extends Component {
 
   componentDidMount() {
     this.setState(this.props.store);
-  }
+  //   Promise.all([
+  //     fetch()
+  //     fetch()
+  //   ])
+  //   .then()
+  // }
 
   render() {
     return (
