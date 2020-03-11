@@ -1,16 +1,30 @@
 import React, { Component } from 'react';
 import './NoteList.css';
 import { Link } from 'react-router-dom';
+import Context from '../../Context';
 
 class NoteList extends Component {
+  
   formatDate(date) {
     return new Date(date).toLocaleString();
   }
 
+  static contextType = Context;
+
+  getNotes() {
+    if(this.props.match.params.id) {
+      return this.context.notes.filter(note => 
+      note.folderId === this.props.match.params.id)}
+    else {
+      return this.context.notes; 
+    }
+  }
+
   render() {
+    const notes = this.getNotes;
     return (
       <ul className="Main note_list">
-        {this.props.notes.map(note => {
+        {notes.map(note => {
           const date = this.formatDate(note.modified);
           return (
             <li key={note.id}>

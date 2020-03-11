@@ -4,7 +4,7 @@ import FolderNav from './Components/FolderNav/FolderNav';
 import NoteList from './Components/NoteList/NoteList';
 import NoteDetails from './Components/NoteDetails/NoteDetails';
 import { Route, Link, Switch } from 'react-router-dom';
-import Context from './Components/Context';
+import Context from './Context';
 
 class App extends Component {
   constructor(props) {
@@ -16,15 +16,28 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.setState(this.props.store);
-  //   Promise.all([
-  //     fetch()
-  //     fetch()
-  //   ])
-  //   .then()
-  // }
+    const API_FOLDERS = "http://localhost:9090/folders";;
+    const API_NOTES = "http://localhost:9090/notes";
+
+    fetch(API_NOTES)
+    .then(res => res.json())
+    .then(data => this.setState(
+      { notes: data }
+    ))
+    
+    fetch(API_FOLDERS)
+    .then(res => res.json())
+    .then(data => this.setState(
+      { folders: data }
+    ))
+  }
 
   render() {
+    const contexts = {
+      notes: this.state.notes,
+      folders: this.state.folders
+    }
+
     return (
       <div className="App">
         <header className="App__header">
@@ -32,38 +45,33 @@ class App extends Component {
             <Link to="/">Noteful</Link>
           </h1>
         </header>
+        <Context.Provider value={contexts}>
         <Route
           exact
           path={['/', '/note-list/:id']}
-          render={() => <FolderNav folders={this.state.folders} />}
+          Component={FolderNav}
         />
         <Switch>
           <Route
             exact
             path="/"
-            render={() => <NoteList notes={this.state.notes} />}
+            component={NoteList}
           />
           <Route
             path="/note-list/:id"
-            render={({ match }) => (
-              <NoteList
-                notes={this.state.notes.filter(
-                  note => note.folderId === match.params.id,
-                )}
+            component={NoteList}
               />
             )}
           />
           <Route
             path="/note-details/:id"
-            render={({ match }) => (
-              <NoteDetails
-                folders={this.state.folders}
-                note={this.state.notes.find(n => n.id === match.params.id)}
+            component={NoteDetails}
               />
             )}
           />
           <Route path="/" render={() => <div>404 Not Found</div>} />
         </Switch>
+        <Context.Provider />
       </div>
     );
   }
