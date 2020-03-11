@@ -11,7 +11,7 @@ class NoteDetails extends Component {
     return (
       <>
         <NoteDetailsNav folder={folder} />
-        <section className="Main__content">
+        <section className="Main">
           <div className="Main__note_header">
             <h3>{name}</h3>
             <p>{dateModified}</p>

@@ -1,10 +1,10 @@
-.Main__content.note_list {
+.Main.note_list {
   list-style-type: none;
   display: grid;
   grid-template-columns: 1fr;
 }
 
-.Main__content.note_list > li {
+.Main.note_list > li {
   padding: 8px;
   margin-top: 16px;
   border: 1px solid black;
@@ -17,7 +17,7 @@
 }
 
 @media screen and (min-width: 600px) {
-  .Main__content.note_list {
+  .Main.note_list {
     grid-template-columns: 1fr 1fr;
   }
 }

@@ -9,7 +9,7 @@ class NoteList extends Component {
 
   render() {
     return (
-      <ul className="Main__content note_list">
+      <ul className="Main note_list">
         {this.props.notes.map(note => {
           const date = this.formatDate(note.modified);
           return (

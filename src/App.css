@@ -13,10 +13,10 @@
   justify-self: center;
 }
 
-.Main__content {
+.Main {
   grid-area: main;
 }
 
-.Sidebar__nav {
+.Sidebar {
   grid-area: nav;
 }

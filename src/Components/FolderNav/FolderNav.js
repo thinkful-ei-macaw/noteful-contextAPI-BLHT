@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 class FolderNav extends Component {
   render() {
     return (
-      <nav className="Sidebar__nav">
+      <nav className="Sidebar">
         <ul>
           {this.props.folders.map(folder => {
             return (

@@ -7,7 +7,7 @@ class NoteDetailsNav extends Component {
     const { id, name } = this.props.folder;
     return (
       <>
-        <nav className="Sidebar__nav">
+        <nav className="Sidebar">
           <Link className="Sidebar__nav_back" to={`/note-list/${id}`}>
             Go Back
           </Link>

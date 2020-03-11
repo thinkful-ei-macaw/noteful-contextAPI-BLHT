@@ -1,12 +1,12 @@
-.Sidebar__nav > ul {
+.Sidebar > ul {
   list-style-type: none;
 }
 
-.Sidebar__nav > ul > li {
+.Sidebar > ul > li {
   display: contents;
 }
 
-.Sidebar__nav a {
+.Sidebar a {
   display: inline-block;
   width: 100%;
   text-align: center;
