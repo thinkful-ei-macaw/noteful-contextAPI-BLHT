@@ -15,22 +15,45 @@ class App extends Component {
     };
   }
 
-  componentDidMount() {
-    const API_FOLDERS = "http://localhost:9090/folders";
-    const API_NOTES = "http://localhost:9090/notes";
+  // componentDidMount() {
+  //   const API_FOLDERS = "http://localhost:9090/folders";
+  //   const API_NOTES = "http://localhost:9090/notes";
 
-    fetch(API_NOTES)
-    .then(res => res.json())
-    .then(data => this.setState(
-      { notes: data }
-    ))
+  //   fetch(API_NOTES)
+  //   .then(res => res.json())
+  //   .then(data => this.setState(
+  //     { notes: data }
+  //   ))
     
-    fetch(API_FOLDERS)
-    .then(res => res.json())
-    .then(data => this.setState(
-      { folders: data }
-    ))
+  //   fetch(API_FOLDERS)
+  //   .then(res => res.json())
+  //   .then(data => this.setState(
+  //     { folders: data }
+  //   ))
+  // }
+
+  componentDidMount() {
+    const api_link_folders = 'http://localhost:9090/folders';
+    const api_link_notes = 'http://localhost:9090/notes';
+
+    Promise.all([fetch(api_link_folders), fetch(api_link_notes)])
+      .then(([folderRes, noteRes]) => {
+        if (!folderRes.ok) return folderRes.json().then(e => Promise.reject(e));
+        if (!noteRes.ok) return noteRes.json().then(e => Promise.reject(e));
+
+        return Promise.all([folderRes.json(), noteRes.json()]);
+      })
+      .then(([folders, notes]) => {
+        this.setState({ folders, notes });
+      })
+      .catch(error => console.error(error));
   }
+
+  setNotes = notes => {
+    this.setState({
+      notes: notes,
+    });
+  };
 
   render() {
     const contexts = {
@@ -52,6 +75,7 @@ class App extends Component {
           Component={FolderNav}
         />
         <Switch>
+        
           <Route
             exact
             path="/"

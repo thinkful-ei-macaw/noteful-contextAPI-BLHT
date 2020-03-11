@@ -11,7 +11,7 @@ class NoteDetails extends Component {
     const note = this.context.notes.find(note => note.id === this.props.match.params.id);
     const { folderId, name, content, modified } = note;
     const dateModified = new Date(modified).toLocaleString();
-    const folder = this.props.folders.find(f => f.id === folderId);
+    const folder = this.context.folders.find(f => f.id === folderId);
 
     return (
       <>
