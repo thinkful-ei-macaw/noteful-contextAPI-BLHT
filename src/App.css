@@ -1,5 +1,4 @@
 .App {
-  height: 100vh;
   display: grid;
   grid-template-rows: minmax(4em, 4em);
   grid-template-columns: repeat(3, 1fr);
