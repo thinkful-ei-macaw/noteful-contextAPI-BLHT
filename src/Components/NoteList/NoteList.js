@@ -14,14 +14,15 @@ class NoteList extends Component {
   getNotes() {
     if(this.props.match.params.id) {
       return this.context.notes.filter(note => 
-      note.folderId === this.props.match.params.id)}
-    else {
+      note.folderId === this.props.match.params.id);
+      } else {
       return this.context.notes; 
     }
   }
 
   render() {
-    const notes = this.getNotes;
+    const notes = this.getNotes();
+    const deleteNote = this.context.delete;
     return (
       <ul className="Main note_list">
         {notes.map(note => {
@@ -32,6 +33,8 @@ class NoteList extends Component {
                 <Link to={`/note-details/${note.id}`}>{note.name}</Link>
               </h2>
               <p>{date}</p>
+              <button onClick={() => deleteNote(note.id)}>
+                Delete Note </button>
             </li>
           );
         })}

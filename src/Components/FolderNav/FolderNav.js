@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import './FolderNav.css';
-import { NavLink } from 'react-router-dom';
-import Context from from '../../Context';
+import { NavLink, Link } from 'react-router-dom';
+import Context from '../../Context';
 
 class FolderNav extends Component {
   static contextType = Context;
   render() {
     const { folders } = this.context;
+    console.log(folders)
     return (
       <nav className="Sidebar">
         <ul>
@@ -22,6 +23,9 @@ class FolderNav extends Component {
               </li>
             );
           })}
+          <li>
+            <Link to ='/addfolder' >Add Folder</Link>
+          </li>
         </ul>
       </nav>
     );

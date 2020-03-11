@@ -3,6 +3,8 @@ import './App.css';
 import FolderNav from './Components/FolderNav/FolderNav';
 import NoteList from './Components/NoteList/NoteList';
 import NoteDetails from './Components/NoteDetails/NoteDetails';
+import AddFolder from './Components/AddFolder/AddFolder';
+import AddNote from './Components/AddNote/AddNote';
 import { Route, Link, Switch } from 'react-router-dom';
 import Context from './Context';
 
@@ -23,21 +25,48 @@ class App extends Component {
     .then(res => res.json())
     .then(data => this.setState(
       { notes: data }
-    ))
+    ));
     
     fetch(API_FOLDERS)
     .then(res => res.json())
     .then(data => this.setState(
       { folders: data }
-    ))
+    ));
+  }
+
+  noteState = (notes) => {
+    this.setState({
+      notes: notes,
+    });
+  };
+
+  deleteNotes = (id) => {
+    const newNotes = this.state.notes.filter(note => note.id !== id);
+    this.noteState(newNotes);
+  }
+
+  addFolder = (folder) => {
+    this.setState({
+      folders: this.state.folders.concat(folder)
+    })
+  }
+
+  addNote = (note) => {
+    this.setState({
+      notes: this.state.notes.concat(note)
+    })
   }
 
   render() {
     const contexts = {
       notes: this.state.notes,
-      folders: this.state.folders
-    }
+      folders: this.state.folders,
+      delete: this.deleteNotes,
+      addFolder: this.addFolder,
+      addNote: this.addNote
+    };
 
+    console.log(contexts)
     return (
       <div className="App">
         <header className="App__header">
@@ -49,7 +78,7 @@ class App extends Component {
         <Route
           exact
           path={['/', '/note-list/:id']}
-          Component={FolderNav}
+          component={FolderNav}
         />
         <Switch>
           <Route
@@ -69,9 +98,17 @@ class App extends Component {
               />
             )}
           />
+          <Route
+          path="/addfolder"
+          component={AddFolder}
+          />
+          <Route
+          path="/addnote"
+          component={AddNote}
+          />
           <Route path="/" render={() => <div>404 Not Found</div>} />
         </Switch>
-        <Context.Provider />
+        </Context.Provider>
       </div>
     );
   }
