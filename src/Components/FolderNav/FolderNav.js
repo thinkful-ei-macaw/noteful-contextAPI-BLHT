@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './FolderNav.css';
 import { NavLink } from 'react-router-dom';
-import Context from from '../../Context';
+import Context from '../../Context';
 
 class FolderNav extends Component {
   static contextType = Context;

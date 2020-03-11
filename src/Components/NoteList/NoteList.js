@@ -21,9 +21,10 @@ class NoteList extends Component {
   }
 
   render() {
-    const notes = this.getNotes;
+    const notes = this.getNotes();
     return (
       <ul className="Main note_list">
+        
         {notes.map(note => {
           const date = this.formatDate(note.modified);
           return (

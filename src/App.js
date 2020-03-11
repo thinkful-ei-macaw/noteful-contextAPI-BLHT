@@ -16,7 +16,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const API_FOLDERS = "http://localhost:9090/folders";;
+    const API_FOLDERS = "http://localhost:9090/folders";
     const API_NOTES = "http://localhost:9090/notes";
 
     fetch(API_NOTES)
@@ -71,7 +71,7 @@ class App extends Component {
           />
           <Route path="/" render={() => <div>404 Not Found</div>} />
         </Switch>
-        <Context.Provider />
+        </Context.Provider>
       </div>
     );
   }
