@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './NoteDetails.css';
 import NoteDetailsNav from '../NoteDetailsNav/NoteDetailsNav';
-import Context from '/.src/Context';
+import MyContext from '../Context';
 
 class NoteDetails extends Component {
 
