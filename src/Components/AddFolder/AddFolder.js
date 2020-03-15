@@ -3,6 +3,7 @@ import Context from '../../Context';
 
 class AddFolder extends React.Component {
     static contextType = Context;
+    
     onSubmit = (e) => {
         e.preventDefault();
         const name = e.target.name.value
