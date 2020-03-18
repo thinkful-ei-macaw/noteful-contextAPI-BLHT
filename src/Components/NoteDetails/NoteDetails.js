@@ -8,7 +8,7 @@ class NoteDetails extends Component {
   static contextType = Context;
 
   deleteRequest = (id, cb) => {
-    fetch(`http://localhost9090/notes/${id}`, {
+    fetch(`http://localhost:9090/notes/${id}`, {
       method: 'DELETE'
     })
     .then(res => res.json())
@@ -20,10 +20,10 @@ class NoteDetails extends Component {
   };
 
   render() {
-    const note = this.context.notes.find(note => note.id === this.props.match.params.id);
+    const note = this.context.notes.find(note => note.id === this.props.match.params.id) || {};
     const { folderId, name, content, modified } = note;
     const dateModified = new Date(modified).toLocaleString();
-    const folder = this.props.folders.find(f => f.id === folderId);
+    const folder = this.context.folders.find(f => f.id === folderId);
 
     return (
       <>

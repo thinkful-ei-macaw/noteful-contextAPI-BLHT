@@ -38,6 +38,7 @@ class NoteList extends Component {
             </li>
           );
         })}
+        <Link to="/addnote" > Add Note </Link> 
       </ul>
     );
   }

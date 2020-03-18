@@ -4,7 +4,7 @@ import './NoteDetailsNav.css';
 
 class NoteDetailsNav extends Component {
   render() {
-    const { id, name } = this.props.folder;
+    const { id, name } = this.props.folder || {};
     return (
       <>
         <nav className="Sidebar">

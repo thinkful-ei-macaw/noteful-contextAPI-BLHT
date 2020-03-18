@@ -2,40 +2,37 @@ import React from 'react';
 import Context from '../../Context';
 
 class AddNote extends React.Component {
-    // constructor() {
-    //     super();
-    //     state = {
-    //         form: '',
-            
-    //     }
-    // }
 
     static contextType = Context;
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const noteName = e.target.name.value;
+        const noteTitle = e.target.name.value;
         const noteDesc = e.target.description.value;
         const noteId = this.getFolderId(this.state.folder.value)
         this.context.addNote({
             name: this.state.name.value,
             modified: Date.now(),
             id: noteId,
-            noteContents: noteDesc
+            content: noteDesc
         })
     }
 
 
 
-    handleAddNote(noteName, noteDesc, id, content) {
-        const API_NOTES = `http://localhost:9090/notes/${ this.context.id }`;
+    handleAddNote(noteTitle, content, folderId) {
+        const API_NOTES = `http://localhost:9090/notes/`;
         fetch(API_NOTES, {
             method: 'POST',
+            headers: {
+                "content-type": "application/json"
+            },
+
             body: JSON.stringify({
-                "name": noteName,
-                "modified": Date.now(),
-                "folderId": id,
-                "content": content
+                "name": noteTitle,
+                "content": content,
+                folderId: folderId,
+                "modified": new Date()
             })
         })
         .then(res => {
@@ -44,22 +41,38 @@ class AddNote extends React.Component {
             }
             return res.json()
         })
-
+        .then(data => {
+            this.context.getNotes();
+            this.props.history.push('/')    
+        })
     }
 
     validateForm = (e) => {
-        let input = e.target.value;
-        if(input === '') {
-            
+        e.preventDefault();
+        let noteTitle = e.target.title.value;
+        let content = e.target.content.value;
+        let folderId = e.target.folderId.value;
+
+        if(noteTitle.length === 0) {
+            alert('Note must have a title!');
+        } else {
+            return this.handleAddNote(noteTitle, content, folderId);
         }
     }
     
 
     render() {
         return (
-            <form onSubmit={this.onSubmit}>
-                <input name="name" />
-                <button>Add Note</button>
+            <form onSubmit={this.validateForm}>
+                <input type="text" 
+                id="note-title" 
+                name="title"
+                />
+                <textarea name="content"></textarea>
+                <select name="folderId"> 
+        {this.context.folders.map(folder =>(<option value={folder.id}>{folder.name}</option>))}
+                </select>
+                <button >Add Note</button>
             </form>
         )
     }

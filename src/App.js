@@ -18,31 +18,14 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const API_FOLDERS = "http://localhost:9090/folders";;
-    const API_NOTES = "http://localhost:9090/notes";
-
-    fetch(API_NOTES)
-    .then(res => res.json())
-    .then(data => this.setState(
-      { notes: data }
-    ));
-    
-    fetch(API_FOLDERS)
-    .then(res => res.json())
-    .then(data => this.setState(
-      { folders: data }
-    ));
-  }
-
-  noteState = (notes) => {
-    this.setState({
-      notes: notes,
-    });
+    this.getNotes();
   };
 
   deleteNotes = (id) => {
     const newNotes = this.state.notes.filter(note => note.id !== id);
-    this.noteState(newNotes);
+    this.setState({
+      notes: newNotes
+    })
   }
 
   addFolder = (folder) => {
@@ -57,16 +40,33 @@ class App extends Component {
     })
   }
 
+  getNotes = () => {
+    const API_FOLDERS = "http://localhost:9090/folders";;
+    const API_NOTES = "http://localhost:9090/notes";
+
+    fetch(API_NOTES)
+    .then(res => res.json())
+    .then(data => this.setState(
+      { notes: data }
+    ));
+    
+    fetch(API_FOLDERS)
+    .then(res => res.json())
+    .then(data => this.setState(
+      { folders: data }
+    ));
+  } 
+
   render() {
     const contexts = {
       notes: this.state.notes,
       folders: this.state.folders,
       delete: this.deleteNotes,
       addFolder: this.addFolder,
-      addNote: this.addNote
+      addNote: this.addNote,
+      getNotes: this.getNotes
     };
 
-    console.log(contexts)
     return (
       <div className="App">
         <header className="App__header">
