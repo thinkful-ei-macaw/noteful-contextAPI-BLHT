@@ -31,7 +31,7 @@ class AddNote extends React.Component {
             body: JSON.stringify({
                 "name": noteTitle,
                 "content": content,
-                folderId: folderId,
+                "folderId": folderId,
                 "modified": new Date()
             })
         })

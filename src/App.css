@@ -3,9 +3,13 @@
   grid-template-rows: minmax(4em, 4em);
   grid-template-columns: repeat(3, 1fr);
   grid-template-areas:
-    'header header header'
-    'nav main main'
-    '... main main';
+  'header header header'
+  'nav main main'
+  '... main main';
+  font-family: monospace;
+  font-size: x-large;
+  color: green;
+  background: burlywood;
 }
 
 .App__header {
@@ -19,4 +23,7 @@
 
 .Sidebar {
   grid-area: nav;
+  display: flex;
+  flex-flow: column;
+  color: darkblue;
 }
